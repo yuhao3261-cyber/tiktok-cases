@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>无限发 · TikTok 美区带货爆款案例</title>
+<meta name="description" content="深圳市无限发科技有限公司 · TikTok 美区带货短视频爆款案例：23 支成片，实拍与 AIGC 两条产线，单条最高播放 250.9K。">
+<meta name="theme-color" content="#0c0a08">
+<meta property="og:title" content="无限发 · TikTok 美区带货爆款案例">
+<meta property="og:description" content="23 支成片 · 实拍 12 / AI 完成 10 / AI+实拍 1 · 单条最高播放 250.9K">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230c0a08'/%3E%3Cpath d='M16 44V20h6l10 15V20h6v24h-6L22 29v15z' fill='%23c9a45a'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+  :root{
+    --bg:#0c0a08;
+    --surface:#181512;
+    --surface-2:#1f1b17;
+    --ink:#f3f2ef;
+    --muted:#b3ada4;
+    --line:#2a251f;
+    --accent:#c9a45a;
+
+    --t-xs:1rem;                      /* 16px 小字/标签 */
+    --t-s:1.0625rem;                  /* 17px 正文 */
+    --t-m:clamp(1.0625rem,1rem + 0.3vw,1.1875rem);
+    --t-l:clamp(1.375rem,1.1rem + 1vw,1.875rem);
+    --t-xl:clamp(2.125rem,1.2rem + 3.9vw,4.25rem);
+
+    --m:20px;
+    --maxw:1360px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Onest","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    font-size:var(--t-s);line-height:1.62;letter-spacing:.01em;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,video{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--accent);color:#0c0a08}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,4.4vw,64px)}
+
+  /* ---------- 顶部 ---------- */
+  .top{position:absolute;top:0;left:0;right:0;z-index:20}
+  .top .bar{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:26px 0}
+  .mark{font-size:var(--t-s);font-weight:500;letter-spacing:.14em}
+  .mark span{color:var(--accent)}
+  .nav{display:flex;gap:26px;font-size:var(--t-s);color:var(--muted)}
+  .nav a{transition:color .2s}
+  .nav a:hover,.nav a:focus-visible{color:var(--ink)}
+
+  /* ---------- 首屏 ---------- */
+  .hero{position:relative;min-height:min(94svh,900px);display:flex;align-items:flex-end;
+        overflow:hidden;padding:120px 0 clamp(40px,6vh,80px)}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg video{width:100%;height:100%;object-fit:cover;opacity:.52;
+                 transform:scale(1.06);will-change:transform}
+  .hero-veil{position:absolute;inset:0;z-index:1;background:rgba(12,10,8,.52)}
+  .hero-veil::after{content:"";position:absolute;inset:0;
+    background:rgba(12,10,8,.94); /* taste-skill-ignore 中性压暗，保证照片上的字可读 */
+    -webkit-mask-image:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,.55) 34%,rgba(0,0,0,0) 72%); /* taste-skill-ignore */
+            mask-image:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,.55) 34%,rgba(0,0,0,0) 72%);} /* taste-skill-ignore */
+  .hero .inner{position:relative;z-index:2;width:100%}
+  .hero h1{
+    font-size:var(--t-xl);line-height:1.02;letter-spacing:-.02em;font-weight:800;
+    margin:0 0 22px;max-width:15em;
+  }
+  .hero p{max-width:26em;color:var(--ink);margin:0 0 34px;font-size:var(--t-m)}
+  .hero p b{color:var(--ink);font-weight:500}
+  .cta{display:inline-flex;align-items:center;gap:12px;background:var(--accent);color:#0c0a08;
+       font-size:var(--t-s);font-weight:600;padding:15px 26px;border-radius:2px;
+       transition:transform .25s,filter .25s}
+  .cta:hover{filter:brightness(1.08)}
+  .cta:active{transform:translateY(1px)}
+  .hero-meta{margin-top:34px;color:var(--muted);font-size:var(--t-xs);letter-spacing:.02em}
+
+  /* ---------- 通用区块 ---------- */
+  .sec{padding:clamp(72px,10vw,150px) 0}
+  .sec h2{font-size:var(--t-xl);line-height:1.08;letter-spacing:-.02em;font-weight:800;
+          margin:0 0 20px;max-width:18em}
+  .lead{max-width:26em;color:var(--ink);font-size:var(--t-m);margin:0}
+
+  /* ---------- 案例墙 ---------- */
+  .filters{display:flex;flex-wrap:wrap;gap:22px;margin:36px 0 40px;font-size:var(--t-s)}
+  .filters button{background:none;border:0;padding:0;color:var(--muted);cursor:pointer;
+                  font:inherit;transition:color .2s}
+  .filters button:hover{color:#cfc9c0}
+  .filters button[aria-pressed="true"]{color:var(--ink);font-weight:500}
+  .filters button[aria-pressed="true"]::after{content:"";display:block;height:2px;
+                  background:var(--accent);margin-top:7px}
+
+  .wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(216px,1fr));gap:clamp(16px,2vw,26px)}
+  .card{position:relative;text-align:left;padding:0;border:0;background:none;cursor:pointer;
+        color:inherit;font:inherit;display:flex;flex-direction:column;
+        transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .35s}
+  .card .shot{position:relative;aspect-ratio:9/16;overflow:hidden;background:var(--surface)}
+  .card .shot img{width:100%;height:100%;object-fit:cover;
+                  transition:transform .6s cubic-bezier(.2,.7,.2,1),filter .4s}
+  .card .shot::after{content:"";position:absolute;inset:0;background:rgba(12,10,8,.28);
+                     transition:background .35s}
+  .card .play{position:absolute;inset:0;display:grid;place-items:center;z-index:2;opacity:0;
+              transition:opacity .3s}
+  .card .play span{width:54px;height:54px;border-radius:50%;background:rgba(12,10,8,.55);
+                   display:grid;place-items:center;font-size:15px;color:var(--ink);
+                   transform:scale(.9);transition:transform .3s}
+  .card:hover .shot img,.card:focus-visible .shot img{transform:scale(1.045)}
+  .card:hover .shot::after{background:rgba(12,10,8,.12)}
+  .card:hover .play{opacity:1}
+  .card:hover .play span{transform:scale(1)}
+  .card .cap{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+             padding:0 2px 11px}
+  .card .cat{font-size:var(--t-s);font-weight:600}
+  .card .typ{font-size:var(--t-xs);color:#b3ada4;white-space:nowrap}
+  .card .typ.ai{color:var(--accent)}
+  .card.hide{display:none}
+
+  @media (min-width:860px){
+    .wall .card:nth-child(3n+2){transform:translateY(30px)}
+  }
+
+  /* ---------- 数据 ---------- */
+  .figures{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,64px);
+           margin-top:56px}
+  .fig .n{font-family:"Unbounded","Onest",sans-serif;font-weight:800;letter-spacing:-.03em;
+          font-size:clamp(2rem,1rem + 3.4vw,3.6rem);line-height:1;color:var(--ink)}
+  .fig .k{margin-top:12px;color:var(--muted);font-size:var(--t-xs);line-height:1.7}
+
+  /* ---------- 产线 ---------- */
+  .lines{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.4vw,54px);margin-top:52px}
+  .line h3{margin:0 0 10px;font-size:var(--t-l);font-weight:600;letter-spacing:-.01em}
+  .line p{margin:0;color:var(--ink);font-size:var(--t-s);max-width:26em}
+  .line .tagrow{margin-top:14px;color:var(--accent);font-size:var(--t-xs)}
+
+  /* ---------- 页脚 ---------- */
+  .foot{padding:0 0 44px}
+  .close-band{background:var(--surface);padding:clamp(72px,10vw,140px) 0;margin-bottom:clamp(56px,7vw,90px)}
+  .close-band h2{font-size:var(--t-xl);line-height:1.06;letter-spacing:-.02em;font-weight:800;
+                 margin:0 0 18px;max-width:16em}
+  .contactbig{display:flex;flex-wrap:wrap;gap:18px 56px;margin-top:52px}
+  .cb{font-size:var(--t-l);font-weight:600;letter-spacing:-.01em;color:var(--ink);
+       padding-bottom:6px;transition:color .2s}
+  .cb:hover{color:var(--accent)}
+  .foot .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:56px}
+  .foot .cols div{font-size:var(--t-s);color:var(--ink)}
+  .foot .cols span{display:block;color:var(--muted);font-size:var(--t-xs);margin-bottom:6px}
+  .foot .fine{color:#b3ada4;max-width:34em;font-size:var(--t-xs);line-height:1.9;margin-top:12px}
+
+  /* ---------- 播放器 ---------- */
+  .lb{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:20px;
+      background:rgba(6,5,4,.96)}
+  .lb.on{display:grid}
+  .lb .box{display:flex;gap:30px;align-items:center;max-width:100%}
+  .lb video{height:min(82svh,820px);aspect-ratio:9/16;background:#000;border-radius:2px}
+  .lb .meta{min-width:150px}
+  .lb .meta .k{color:var(--muted);font-size:var(--t-xs);margin-bottom:6px}
+  .lb .meta .v{font-size:var(--t-l);font-weight:600;margin-bottom:26px;letter-spacing:-.01em}
+  .lb .meta .v.ai{color:var(--accent)}
+  .lb .x{position:absolute;top:18px;right:20px;width:44px;height:44px;border-radius:50%;
+         background:var(--surface);border:0;color:#cfc9c0;font-size:18px;line-height:1;cursor:pointer;
+         transition:background .2s,color .2s}
+  .lb .x:hover{background:var(--surface-2);color:var(--ink)}
+
+  /* ---------- 进场动效 ---------- */
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  .rv.d1{transition-delay:.09s}
+  .rv.d2{transition-delay:.18s}
+  .rv.d3{transition-delay:.27s}
+
+  @media (prefers-reduced-motion:reduce){
+    .rv{opacity:1;transform:none;transition:none}
+    .hero-bg video{transform:none}
+    .card .shot img{transition:none}
+  }
+
+  /* ---------- 手机 ---------- */
+  @media (max-width:860px){
+    .top .bar{padding:20px 0}
+    .hero{min-height:88svh;padding-top:96px}
+    .hero h1{max-width:12em}
+    .nav{gap:18px;font-size:var(--t-xs)}
+    .wall{grid-template-columns:1fr 1fr;gap:14px}
+    .wall .card:nth-child(3n+2){transform:none}
+    .card .shot img{filter:saturate(.98)}
+    .figures{grid-template-columns:1fr;gap:30px}
+    .lines{grid-template-columns:1fr;gap:30px}
+    .foot .cols{grid-template-columns:1fr;gap:20px}
+    .lb .box{flex-direction:column;gap:14px}
+    .lb video{height:auto;width:min(100%,86vw);max-height:70svh}
+    .lb .meta{display:flex;gap:34px;min-width:0}
+    .lb .meta .k{margin-bottom:2px}
+    .lb .meta .v{font-size:var(--t-m);margin:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap">
+    <div class="bar">
+      <a class="mark" href="#top">无限发<span> · </span>DUOFRAME</a>
+      <nav class="nav">
+        <a href="#work">案例</a>
+        <a href="#lines">产线</a>
+        <a href="#contact">联系</a>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <video id="heroVid" muted loop playsinline preload="metadata" poster="assets/covers/v13.jpg">
+      <source src="assets/videos/v13.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <h1 class="rv">把产品拍成<br>能卖的那 15 秒</h1>
+    <p class="rv d1">TikTok 美区带货短视频。<b>23 支爆款案例</b>，实拍与 AIGC 两条产线，每一支点开就能播。</p>
+    <a class="cta rv d2" href="#work">看这 23 支片子</a>
+    <div class="hero-meta rv d3">深圳 · 跨境电商短视频 · 实拍 12 / AI 完成 10 / AI+实拍 1</div>
+  </div>
+</header>
+
+<main id="work">
+  <section class="sec">
+    <div class="wrap">
+      <h2 class="rv">爆款案例</h2>
+      <p class="lead rv d1">同样的 15 秒，实拍的靠场景和手感，AIGC 的靠节奏和反差。下面是公司跑过量的成片，按品类排。</p>
+
+      <div class="filters rv d1" role="group" aria-label="按拍摄方式筛选">
+        <button data-f="all" aria-pressed="true">全部 23</button>
+        <button data-f="实拍" aria-pressed="false">实拍 12</button>
+        <button data-f="AI" aria-pressed="false">AI 完成 10</button>
+        <button data-f="AI+实拍" aria-pressed="false">AI + 实拍 1</button>
+      </div>
+
+      <div class="wall" id="wall"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="proof">
+    <div class="wrap">
+      <h2 class="rv">跑出来的数</h2>
+      <p class="lead rv d1">只列后台能对得上的几个数，其他不吹。</p>
+      <div class="figures">
+        <div class="fig rv d1">
+          <div class="n">250.9K</div>
+          <div class="k">单条最高播放<br>单条 15 天自然播放 20 万+</div>
+        </div>
+        <div class="fig rv d2">
+          <div class="n">$5.1K</div>
+          <div class="k">单月内容带动成交 GMV<br>宠物 / 家居类目</div>
+        </div>
+        <div class="fig rv d3">
+          <div class="n">23</div>
+          <div class="k">在跑的成片案例<br>宠物 · 3C · 家居 · 服饰 · 出行</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="lines">
+    <div class="wrap">
+      <h2 class="rv">两条产线，一个交付节奏</h2>
+      <p class="lead rv d1">不是所有品都需要真人出镜，也不是所有品都能纯 AI。先定品类，再定产线。</p>
+      <div class="lines">
+        <div class="line rv d1">
+          <h3>实拍</h3>
+          <p>寄样到成片：脚本、拍摄、口播、字幕、剪辑全包。真实使用场景，宠物、家居、3C 的主力打法。</p>
+          <div class="tagrow">12 支案例</div>
+        </div>
+        <div class="line rv d2">
+          <h3>AIGC</h3>
+          <p>AI 达人出镜，不用寄样、不用外景、不用模特。当天出片，适合批量测素材、服饰与小件。</p>
+          <div class="tagrow">10 支案例</div>
+        </div>
+        <div class="line rv d3">
+          <h3>AI + 实拍</h3>
+          <p>前 3 秒用 AI 做钩子抢注意力，中段接实拍给可信度。反差型爆点素材走这条。</p>
+          <div class="tagrow">1 支案例</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="contact">
+  <div class="close-band">
+    <div class="wrap">
+      <h2 class="rv">看完想拍哪一类？</h2>
+      <p class="lead rv d1">把品类和大概的月度条数发过来，我们先出 1 条同品类的样片给你看手感，再谈量。</p>
+      <div class="contactbig rv d2">
+        <a href="weixin://" class="cb">微信 1905396071</a>
+        <a href="tel:+8613322694458" class="cb">电话 133 2269 4458</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="cols rv d1">
+      <div><span>公司</span>深圳市无限发科技有限公司</div>
+      <div><span>做什么</span>TikTok 美区带货短视频 · 实拍与 AIGC</div>
+      <div><span>在哪</span>深圳 · 可对接美区店铺内容与运营</div>
+    </div>
+    <div class="fine">
+      本页视频仅用于合作洽谈展示，版权归各自品牌方所有，未经许可请勿转载或用于二次投放。<br>
+      © 2026 深圳市无限发科技有限公司
+    </div>
+  </div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="案例播放">
+  <button class="x" id="lbx" aria-label="关闭">×</button>
+  <div class="box">
+    <video id="lbv" controls playsinline webkit-playsinline preload="none"></video>
+    <div class="meta">
+      <div><div class="k">品类</div><div class="v" id="lbc">—</div></div>
+      <div><div class="k">是否 AI 完成</div><div class="v" id="lba">—</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+var CASES = [{"id":"v01","cat":"数码配件","type":"实拍"},{"id":"v02","cat":"数码配件","type":"实拍"},{"id":"v03","cat":"3C 数码","type":"实拍"},{"id":"v04","cat":"出行装备","type":"实拍"},{"id":"v05","cat":"出行装备","type":"实拍"},{"id":"v06","cat":"小家电","type":"实拍"},{"id":"v07","cat":"珠宝首饰","type":"AI"},{"id":"v08","cat":"小家电","type":"实拍"},{"id":"v09","cat":"小家电","type":"实拍"},{"id":"v10","cat":"家居日用","type":"AI"},{"id":"v11","cat":"宠物用品","type":"实拍"},{"id":"v12","cat":"生活好物","type":"实拍"},{"id":"v13","cat":"家居","type":"实拍"},{"id":"v14","cat":"宠物用品","type":"实拍"},{"id":"v15","cat":"家居收纳","type":"AI"},{"id":"v16","cat":"厨房用品","type":"AI"},{"id":"v17","cat":"服饰配件","type":"AI"},{"id":"v18","cat":"宠物用品","type":"AI"},{"id":"v19","cat":"宠物服饰","type":"AI"},{"id":"v20","cat":"宠物美容工具","type":"AI+实拍"},{"id":"v21","cat":"宠物洗护","type":"AI"},{"id":"v22","cat":"宠物洗护","type":"AI"},{"id":"v23","cat":"宠物喂食器","type":"AI"}];
+
+(function(){
+  var wall = document.getElementById('wall');
+  var LBL = {'实拍':'实拍','AI':'AI 完成','AI+实拍':'AI + 实拍'};
+
+  CASES.forEach(function(c, i){
+    var b = document.createElement('button');
+    b.className = 'card';
+    b.dataset.f = c.type;
+    b.dataset.i = i;
+    b.setAttribute('aria-label', c.cat + ' · ' + LBL[c.type] + '，播放');
+    b.innerHTML =
+      '<span class="cap"><span class="cat">' + c.cat + '</span>' +
+      '<span class="typ' + (c.type === '实拍' ? '' : ' ai') + '">' + LBL[c.type] + '</span></span>' +
+      '<span class="shot">' +
+        '<img src="assets/covers/' + c.id + '.jpg" alt="' + c.cat + ' 案例封面" loading="lazy" decoding="async">' +
+        '<span class="play" aria-hidden="true"><span>▶</span></span>' +
+      '</span>';
+    wall.appendChild(b);
+  });
+
+  // 筛选
+  var fbtns = [].slice.call(document.querySelectorAll('.filters button'));
+  fbtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      fbtns.forEach(function(o){ o.setAttribute('aria-pressed', o === btn ? 'true' : 'false'); });
+      var f = btn.dataset.f;
+      [].slice.call(wall.children).forEach(function(card){
+        var show = (f === 'all' || card.dataset.f === f);
+        card.classList.toggle('hide', !show);
+      });
+    });
+  });
+
+  // 灯箱
+  var lb = document.getElementById('lb'), lbv = document.getElementById('lbv'),
+      lbc = document.getElementById('lbc'), lba = document.getElementById('lba');
+  function closeLb(){
+    lb.classList.remove('on');
+    try { lbv.pause(); } catch(e){}
+    lbv.removeAttribute('src'); lbv.load();
+    document.body.style.overflow = '';
+  }
+  wall.addEventListener('click', function(e){
+    var card = e.target.closest('.card');
+    if (!card) return;
+    var c = CASES[+card.dataset.i];
+    lbv.src = 'assets/videos/' + c.id + '.mp4';
+    lbc.textContent = c.cat;
+    lba.textContent = LBL[c.type];
+    lba.className = 'v' + (c.type === '实拍' ? '' : ' ai');
+    lb.classList.add('on');
+    document.body.style.overflow = 'hidden';
+    var p = lbv.play(); if (p && p.catch) p.catch(function(){});
+  });
+  document.getElementById('lbx').addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e){ if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeLb(); });
+
+  // 首屏背景片
+  var hv = document.getElementById('heroVid');
+  if (hv) { var pp = hv.play(); if (pp && pp.catch) pp.catch(function(){}); }
+
+  // 进场
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  // 卡片逐格进场
+  var io2 = new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if (en.isIntersecting) {
+        var el = en.target;
+        var idx = [].indexOf.call(wall.children, el) % 6;
+        el.style.transitionDelay = (idx * 55) + 'ms';
+        el.style.opacity = 1; el.style.transform = '';
+        io2.unobserve(el);
+      }
+    });
+  }, {rootMargin:'0px 0px -4% 0px'});
+  [].slice.call(wall.children).forEach(function(card){
+    card.style.opacity = 0; card.style.transform = 'translateY(20px)';
+    io2.observe(card);
+  });
+
+  // 滚动视差（仅桌面、有动效偏好）
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && hv) {
+    var tick = false;
+    window.addEventListener('scroll', function(){
+      if (tick) return; tick = true;
+      requestAnimationFrame(function(){
+        var y = Math.min(window.scrollY, 900);
+        hv.style.transform = 'scale(1.06) translateY(' + (y * 0.08) + 'px)';
+        tick = false;
+      });
+    }, {passive:true});
+  }
+})();
+</script>
+</body>
+</html>
