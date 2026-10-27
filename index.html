@@ -191,7 +191,9 @@
     .lines{grid-template-columns:1fr;gap:30px}
     .foot .cols{grid-template-columns:1fr;gap:20px}
     .lb .box{flex-direction:column;gap:14px}
-    .lb video{height:auto;width:min(100%,86vw);max-height:70svh}
+    .lb .vwrap{width:min(100%,86vw)}
+    .lb video{height:auto;width:100%;max-height:70svh}
+    .lb .tap span{width:60px;height:60px;font-size:18px}
     .lb .meta{display:flex;gap:34px;min-width:0}
     .lb .meta .k{margin-bottom:2px}
     .lb .meta .v{font-size:var(--t-m);margin:0}
@@ -318,10 +320,14 @@
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="案例播放">
   <button class="x" id="lbx" aria-label="关闭">×</button>
   <div class="box">
-    <video id="lbv" controls playsinline webkit-playsinline preload="none"></video>
+    <div class="vwrap">
+      <video id="lbv" controls playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5-page" x5-video-orientation="portrait" preload="metadata"></video>
+      <button class="tap" id="lbtap" aria-label="播放视频"><span>▶</span><em>点击播放</em></button>
+    </div>
     <div class="meta">
       <div><div class="k">品类</div><div class="v" id="lbc">—</div></div>
       <div><div class="k">是否 AI 完成</div><div class="v" id="lba">—</div></div>
+      <a class="open" id="lbopen" href="#" target="_blank" rel="noopener">播放不了？在浏览器打开</a>
     </div>
   </div>
 </div>
@@ -362,26 +368,53 @@ var CASES = [{"id":"v01","cat":"数码配件","type":"实拍"},{"id":"v02","cat"
     });
   });
 
-  // 灯箱
+  // 灯箱（兼容 iOS Safari / 微信 X5：先响应用户手势，失败则给可点的播放遮罩与直开链接）
   var lb = document.getElementById('lb'), lbv = document.getElementById('lbv'),
-      lbc = document.getElementById('lbc'), lba = document.getElementById('lba');
+      lbc = document.getElementById('lbc'), lba = document.getElementById('lba'),
+      lbtap = document.getElementById('lbtap'), lbopen = document.getElementById('lbopen');
+
+  function hideTap(){ lbtap.classList.remove('on'); }
+  function showTap(){ lbtap.classList.add('on'); }
+
+  function tryPlay(){
+    var p = lbv.play();
+    if (p && p.catch) { p.catch(function(){ showTap(); }); }
+  }
+
+  lbv.addEventListener('playing', hideTap);
+  lbv.addEventListener('canplay', function(){ if (lbv.paused) tryPlay(); });
+  lbv.addEventListener('error', showTap);
+  lbtap.addEventListener('click', function(){
+    hideTap();
+    tryPlay();
+  });
+
   function closeLb(){
     lb.classList.remove('on');
     try { lbv.pause(); } catch(e){}
     lbv.removeAttribute('src'); lbv.load();
+    hideTap();
     document.body.style.overflow = '';
   }
+
   wall.addEventListener('click', function(e){
     var card = e.target.closest('.card');
     if (!card) return;
     var c = CASES[+card.dataset.i];
-    lbv.src = 'assets/videos/' + c.id + '.mp4';
+    var url = 'assets/videos/' + c.id + '.mp4';
     lbc.textContent = c.cat;
     lba.textContent = LBL[c.type];
     lba.className = 'v' + (c.type === '实拍' ? '' : ' ai');
+    lbopen.href = url;
+    lbv.poster = 'assets/covers/' + c.id + '.jpg';
     lb.classList.add('on');
     document.body.style.overflow = 'hidden';
-    var p = lbv.play(); if (p && p.catch) p.catch(function(){});
+    // 同步设置 src 并立即 play()，保住点击手势（iOS 只认手势内触发的 play）
+    lbv.src = url;
+    lbv.load();
+    tryPlay();
+    // 1.2s 还没播起来 → 露出可点的播放遮罩（微信里点一下必定能播）
+    setTimeout(function(){ if (lbv.paused) showTap(); }, 1200);
   });
   document.getElementById('lbx').addEventListener('click', closeLb);
   lb.addEventListener('click', function(e){ if (e.target === lb) closeLb(); });
