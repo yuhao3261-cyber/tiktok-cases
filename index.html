@@ -55,28 +55,23 @@
   .nav a:hover,.nav a:focus-visible{color:var(--ink)}
 
   /* ---------- 首屏 ---------- */
-  .hero{position:relative;min-height:min(92svh,880px);display:flex;align-items:center;
-        overflow:hidden;padding:120px 0 clamp(40px,6vh,72px)}
-  .hero-bg{position:absolute;inset:0;z-index:0}
-  .hero-bg img{width:100%;height:100%;object-fit:cover;
-               filter:blur(46px) saturate(1.15);transform:scale(1.14);opacity:.5}
-  .hero-veil{position:absolute;inset:0;z-index:1;background:rgba(12,10,8,.52)}
-  .hero-veil::after{content:"";position:absolute;inset:0;
-    background:rgba(12,10,8,.94); /* taste-skill-ignore 中性压暗，保证照片上的字可读 */
-    -webkit-mask-image:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,.55) 34%,rgba(0,0,0,0) 72%); /* taste-skill-ignore */
-            mask-image:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,.55) 34%,rgba(0,0,0,0) 72%);} /* taste-skill-ignore */
-  .hero .inner{position:relative;z-index:2;width:100%;max-width:1180px;margin:0 auto;display:grid;
-               grid-template-columns:minmax(0,1fr) clamp(260px,32vw,392px);
-               gap:clamp(30px,5vw,76px);align-items:center}
-  .hero-panel{margin:0}
-  .hero-panel video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#000;
-                    border-radius:2px}
-  .hero-panel figcaption{margin-top:13px;color:var(--muted);font-size:var(--t-xs)}
+  .hero{position:relative;min-height:min(94svh,900px);display:flex;align-items:center;
+        overflow:hidden;padding:110px 0 clamp(48px,7vh,80px)}
+  .hero-bg{position:absolute;inset:0;z-index:0;background:#0c0a08}
+  .hero-bg video{width:100%;height:100%;object-fit:cover;opacity:.82;transform:scale(1.03)}
+  .hero-veil{position:absolute;inset:0;z-index:1;background:rgba(12,10,8,.66)} /* taste-skill-ignore 中性压暗，保证视频上的字可读 */
+  .hero-veil::after{content:"";position:absolute;inset:0;background:rgba(12,10,8,.96); /* taste-skill-ignore */
+    -webkit-mask-image:linear-gradient(to right,rgba(0,0,0,1) 0%,rgba(0,0,0,.86) 26%,rgba(0,0,0,.18) 62%,rgba(0,0,0,0) 86%); /* taste-skill-ignore */
+            mask-image:linear-gradient(to right,rgba(0,0,0,1) 0%,rgba(0,0,0,.86) 26%,rgba(0,0,0,.18) 62%,rgba(0,0,0,0) 86%);} /* taste-skill-ignore */
+  .hero-veil::before{content:"";position:absolute;inset:0;background:rgba(12,10,8,.55); /* taste-skill-ignore */
+    -webkit-mask-image:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,.4) 42%,rgba(0,0,0,0) 78%); /* taste-skill-ignore */
+            mask-image:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,.4) 42%,rgba(0,0,0,0) 78%);} /* taste-skill-ignore */
+  .hero .inner{position:relative;z-index:2;width:100%;max-width:1180px;margin:0 auto}
   .hero h1{
-    font-size:var(--t-xl);line-height:1.02;letter-spacing:-.02em;font-weight:800;
-    margin:0 0 22px;max-width:12em;
+    font-size:clamp(2.6rem,5.6vw,5.1rem);line-height:1.03;letter-spacing:-.025em;font-weight:800;
+    margin:0 0 24px;max-width:11em;
   }
-  .hero p{max-width:24em;color:var(--ink);margin:0 0 34px;font-size:var(--t-m)}
+  .hero p{max-width:23em;color:var(--ink);margin:0 0 36px;font-size:var(--t-m)}
   .hero p b{color:var(--ink);font-weight:600}
   .cta{display:inline-flex;align-items:center;gap:12px;background:var(--accent);color:#0c0a08;
        font-size:var(--t-s);font-weight:600;padding:15px 26px;border-radius:2px;
@@ -197,10 +192,10 @@
   /* ---------- 手机 ---------- */
   @media (max-width:860px){
     .top .bar{padding:20px 0}
-    .hero{min-height:auto;padding:104px 0 56px;align-items:flex-start}
-    .hero .inner{grid-template-columns:1fr;gap:34px}
-    .hero-panel{width:min(100%,300px)}
-    .hero h1{max-width:11em}
+    .hero{min-height:min(92svh,760px);padding:104px 0 56px;align-items:flex-end}
+    .hero-bg video{opacity:.78}
+    .hero-veil{background:rgba(12,10,8,.72)}
+    .hero h1{max-width:9em;font-size:clamp(2.2rem,9vw,3.2rem)}
     .hero h1{max-width:12em}
     .nav{gap:18px;font-size:var(--t-xs)}
     .wall{grid-template-columns:1fr 1fr;gap:14px}
@@ -236,7 +231,8 @@
 
 <header class="hero" id="top">
   <div class="hero-bg" aria-hidden="true">
-    <img src="assets/covers/v13.jpg" alt="" aria-hidden="true">
+    <video id="heroVid" muted loop playsinline autoplay preload="auto"
+           poster="assets/covers/v13.jpg" src="assets/videos/hero-bg.mp4"></video>
   </div>
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="wrap inner">
@@ -246,11 +242,6 @@
       <a class="cta rv d2" href="#work">看这 23 支片子</a>
       <div class="hero-meta rv d3">深圳 · 跨境电商短视频 · 实拍 12 / AI 完成 10 / AI+实拍 1</div>
     </div>
-    <figure class="hero-panel rv d1">
-      <video id="heroVid" muted loop playsinline autoplay preload="auto"
-             poster="assets/covers/v13.jpg" src="assets/videos/v13.mp4"></video>
-      <figcaption>家纺床品 · 单条 250.9K 播放</figcaption>
-    </figure>
   </div>
 </header>
 
@@ -391,6 +382,14 @@ var CASES = [{"id":"v01","cat":"数码配件","type":"实拍"},{"id":"v02","cat"
       });
     });
   });
+
+  // 首屏背景：窄屏换小体积版本，避免手机上下 9.5MB
+  var hv = document.getElementById('heroVid');
+  if (hv && window.innerWidth <= 860 && hv.getAttribute('src') !== 'assets/videos/hero-bg-m.mp4') {
+    hv.setAttribute('src', 'assets/videos/hero-bg-m.mp4');
+    hv.load();
+    var __hp = hv.play(); if (__hp && __hp.catch) __hp.catch(function(){});
+  }
 
   // 灯箱（兼容 iOS Safari / 微信 X5：先响应用户手势，失败则给可点的播放遮罩与直开链接）
   var lb = document.getElementById('lb'), lbv = document.getElementById('lbv'),
