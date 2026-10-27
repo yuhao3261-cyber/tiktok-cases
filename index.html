@@ -155,6 +155,16 @@
       background:rgba(6,5,4,.96)}
   .lb.on{display:grid}
   .lb .box{display:flex;gap:30px;align-items:center;max-width:100%}
+  .lb .vwrap{position:relative;display:flex;line-height:0}
+  .lb .tap{position:absolute;inset:0;display:none;grid-auto-flow:row;align-content:center;
+           justify-items:center;gap:10px;background:rgba(6,5,4,.34);border:0;padding:0;
+           cursor:pointer;color:#fff;border-radius:2px}
+  .lb .tap.on{display:grid}
+  .lb .tap span{width:72px;height:72px;border-radius:50%;background:rgba(12,10,8,.62);
+                display:grid;place-items:center;font-size:22px}
+  .lb .tap em{font-style:normal;font-size:var(--t-xs);color:#e9e5df;line-height:1.4}
+  .lb .open{display:inline-block;color:var(--accent);font-size:var(--t-xs);
+            margin-top:22px;text-decoration:underline;text-underline-offset:4px}
   .lb video{height:min(82svh,820px);aspect-ratio:9/16;background:#000;border-radius:2px}
   .lb .meta{min-width:150px}
   .lb .meta .k{color:var(--muted);font-size:var(--t-xs);margin-bottom:6px}
