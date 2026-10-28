@@ -87,7 +87,10 @@
   .lead{max-width:26em;color:var(--ink);font-size:var(--t-m);margin:0}
 
   /* ---------- 案例墙 ---------- */
-  .filters{display:flex;flex-wrap:wrap;gap:22px;margin:36px 0 40px;font-size:var(--t-s)}
+  .filterbar{position:sticky;top:0;z-index:30;background:rgba(12,10,8,.9);
+             backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px); /* taste-skill-ignore 唯一一条粘顶筛选条，允许 */
+             padding:16px 0 14px;margin:30px 0 34px}
+  .filters{display:flex;flex-wrap:wrap;gap:22px;font-size:var(--t-s)}
   .filters button{background:none;border:0;padding:0;color:var(--muted);cursor:pointer;
                   font:inherit;transition:color .2s}
   .filters button:hover{color:#cfc9c0}
@@ -95,7 +98,7 @@
   .filters button[aria-pressed="true"]::after{content:"";display:block;height:2px;
                   background:var(--accent);margin-top:7px}
 
-  .wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(216px,1fr));gap:clamp(16px,2vw,26px)}
+  .wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(198px,1fr));gap:clamp(14px,1.7vw,24px)}
   .card{position:relative;text-align:left;padding:0;border:0;background:none;cursor:pointer;
         color:inherit;font:inherit;display:flex;flex-direction:column;
         transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .35s}
@@ -113,6 +116,8 @@
   .card:hover .shot::after{background:rgba(12,10,8,.12)}
   .card:hover .play{opacity:1}
   .card:hover .play span{transform:scale(1)}
+  .card .idx{color:#6f6a62;font-size:var(--t-xs);font-variant-numeric:tabular-nums;
+             margin-right:8px;letter-spacing:.02em}
   .card .cap{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
              padding:0 2px 11px}
   .card .cat{font-size:var(--t-s);font-weight:600}
@@ -125,7 +130,7 @@
   }
 
   /* ---------- 数据 ---------- */
-  .figures{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,64px);
+  .figures{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(24px,4vw,64px);
            margin-top:56px}
   .fig .n{font-family:"Unbounded","Onest",sans-serif;font-weight:800;letter-spacing:-.03em;
           font-size:clamp(2rem,1rem + 3.4vw,3.6rem);line-height:1;color:var(--ink)}
@@ -249,13 +254,15 @@
   <section class="sec">
     <div class="wrap">
       <h2 class="rv">爆款案例</h2>
-      <p class="lead rv d1">同样的 15 秒，实拍的靠场景和手感，AIGC 的靠节奏和反差。下面是公司跑过量的成片，按品类排。</p>
+      <p class="lead rv d1">同样的 15 秒，实拍的靠场景和手感，AIGC 的靠节奏和反差。28 支跑过量的成片，按品类排，点开就能播。</p>
 
-      <div class="filters rv d1" role="group" aria-label="按拍摄方式筛选">
-        <button data-f="all" aria-pressed="true">全部 23</button>
+      <div class="filterbar">
+      <div class="filters" role="group" aria-label="按拍摄方式筛选">
+        <button data-f="all" aria-pressed="true">全部 28</button>
         <button data-f="实拍" aria-pressed="false">实拍 12</button>
-        <button data-f="AI" aria-pressed="false">AI 完成 10</button>
+        <button data-f="AI" aria-pressed="false">AI 完成 15</button>
         <button data-f="AI+实拍" aria-pressed="false">AI + 实拍 1</button>
+      </div>
       </div>
 
       <div class="wall" id="wall"></div>
@@ -265,19 +272,15 @@
   <section class="sec" id="proof">
     <div class="wrap">
       <h2 class="rv">跑出来的数</h2>
-      <p class="lead rv d1">只列后台能对得上的几个数，其他不吹。</p>
+      <p class="lead rv d1">只列后台能对得上的数，其他不吹。</p>
       <div class="figures">
         <div class="fig rv d1">
           <div class="n">250.9K</div>
           <div class="k">单条最高播放<br>单条 15 天自然播放 20 万+</div>
         </div>
         <div class="fig rv d2">
-          <div class="n">$5.1K</div>
-          <div class="k">单月内容带动成交 GMV<br>宠物 / 家居类目</div>
-        </div>
-        <div class="fig rv d3">
-          <div class="n">23</div>
-          <div class="k">在跑的成片案例<br>宠物 · 3C · 家居 · 服饰 · 出行</div>
+          <div class="n">28</div>
+          <div class="k">在跑的成片案例<br>宠物 · 3C · 家居 · 服饰 · 出行 · 房车配件</div>
         </div>
       </div>
     </div>
@@ -348,7 +351,7 @@
 </div>
 
 <script>
-var CASES = [{"id":"v01","cat":"数码配件","type":"实拍"},{"id":"v02","cat":"数码配件","type":"实拍"},{"id":"v03","cat":"3C 数码","type":"实拍"},{"id":"v04","cat":"出行装备","type":"实拍"},{"id":"v05","cat":"出行装备","type":"实拍"},{"id":"v06","cat":"小家电","type":"实拍"},{"id":"v07","cat":"珠宝首饰","type":"AI"},{"id":"v08","cat":"小家电","type":"实拍"},{"id":"v09","cat":"小家电","type":"实拍"},{"id":"v10","cat":"家居日用","type":"AI"},{"id":"v11","cat":"宠物用品","type":"实拍"},{"id":"v12","cat":"生活好物","type":"实拍"},{"id":"v13","cat":"家居","type":"实拍"},{"id":"v14","cat":"宠物用品","type":"实拍"},{"id":"v15","cat":"家居收纳","type":"AI"},{"id":"v16","cat":"厨房用品","type":"AI"},{"id":"v17","cat":"服饰配件","type":"AI"},{"id":"v18","cat":"宠物用品","type":"AI"},{"id":"v19","cat":"宠物服饰","type":"AI"},{"id":"v20","cat":"宠物美容工具","type":"AI+实拍"},{"id":"v21","cat":"宠物洗护","type":"AI"},{"id":"v22","cat":"宠物洗护","type":"AI"},{"id":"v23","cat":"宠物喂食器","type":"AI"}];
+var CASES = [{"id": "v01", "cat": "数码配件", "type": "实拍"}, {"id": "v02", "cat": "数码配件", "type": "实拍"}, {"id": "v03", "cat": "3C 数码", "type": "实拍"}, {"id": "v04", "cat": "出行装备", "type": "实拍"}, {"id": "v05", "cat": "出行装备", "type": "实拍"}, {"id": "v06", "cat": "小家电", "type": "实拍"}, {"id": "v07", "cat": "珠宝首饰", "type": "AI"}, {"id": "v08", "cat": "小家电", "type": "实拍"}, {"id": "v09", "cat": "小家电", "type": "实拍"}, {"id": "v10", "cat": "家居日用", "type": "AI"}, {"id": "v11", "cat": "宠物用品", "type": "实拍"}, {"id": "v12", "cat": "生活好物", "type": "实拍"}, {"id": "v13", "cat": "家居", "type": "实拍"}, {"id": "v14", "cat": "宠物用品", "type": "实拍"}, {"id": "v15", "cat": "家居收纳", "type": "AI"}, {"id": "v16", "cat": "厨房用品", "type": "AI"}, {"id": "v17", "cat": "服饰配件", "type": "AI"}, {"id": "v18", "cat": "宠物用品", "type": "AI"}, {"id": "v19", "cat": "宠物服饰", "type": "AI"}, {"id": "v20", "cat": "宠物美容工具", "type": "AI+实拍"}, {"id": "v21", "cat": "宠物洗护", "type": "AI"}, {"id": "v22", "cat": "宠物洗护", "type": "AI"}, {"id": "v23", "cat": "宠物喂食器", "type": "AI"}, {"id": "v24", "cat": "房车牵引钩", "type": "AI"}, {"id": "v25", "cat": "拖车移车架", "type": "AI"}, {"id": "v26", "cat": "拖车千斤顶", "type": "AI"}, {"id": "v27", "cat": "电动千斤顶", "type": "AI"}, {"id": "v28", "cat": "电动喷雾器", "type": "AI"}];
 
 (function(){
   var wall = document.getElementById('wall');
@@ -361,7 +364,7 @@ var CASES = [{"id":"v01","cat":"数码配件","type":"实拍"},{"id":"v02","cat"
     b.dataset.i = i;
     b.setAttribute('aria-label', c.cat + ' · ' + LBL[c.type] + '，播放');
     b.innerHTML =
-      '<span class="cap"><span class="cat">' + c.cat + '</span>' +
+      '<span class="cap"><span class="cat"><i class="idx">' + (i < 9 ? '0' : '') + (i + 1) + '</i>' + c.cat + '</span>' +
       '<span class="typ' + (c.type === '实拍' ? '' : ' ai') + '">' + LBL[c.type] + '</span></span>' +
       '<span class="shot">' +
         '<img src="assets/covers/' + c.id + '.jpg" alt="' + c.cat + ' 案例封面" loading="lazy" decoding="async">' +
