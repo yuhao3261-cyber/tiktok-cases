@@ -117,8 +117,6 @@
   .card:hover .shot::after{background:rgba(12,10,8,.12)}
   .card:hover .play{opacity:1}
   .card:hover .play span{transform:scale(1)}
-  .card .idx{color:#6f6a62;font-size:var(--t-xs);font-variant-numeric:tabular-nums;
-             margin-right:8px;letter-spacing:.02em}
   .card .cap{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
              padding:0 2px 11px}
   .card .cat{font-size:var(--t-s);font-weight:600}
@@ -204,7 +202,12 @@
     .hero h1{max-width:9em;font-size:clamp(2.2rem,9vw,3.2rem)}
     .hero h1{max-width:12em}
     .nav{gap:18px;font-size:var(--t-xs)}
-    .wall{grid-template-columns:1fr 1fr;gap:14px}
+    .filterbar{padding:12px 0 10px;margin:22px 0 26px}
+    .filters{flex-wrap:nowrap;overflow-x:auto;gap:18px;padding-bottom:2px;
+             -webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .filters::-webkit-scrollbar{display:none}
+    .filters button{flex:0 0 auto;white-space:nowrap}
+    .wall{grid-template-columns:repeat(3,1fr);gap:14px}
     .wall .card:nth-child(3n+2){transform:none}
     .card .shot img{filter:saturate(.98)}
     .figures{grid-template-columns:1fr;gap:30px}
@@ -217,6 +220,11 @@
     .lb .meta{display:flex;gap:34px;min-width:0}
     .lb .meta .k{margin-bottom:2px}
     .lb .meta .v{font-size:var(--t-m);margin:0}
+  }
+
+  @media (max-width:560px){
+    .wall{grid-template-columns:repeat(2,1fr)}
+    .hero h1{font-size:clamp(2rem,8.4vw,2.6rem)}
   }
 </style>
 </head>
@@ -237,16 +245,18 @@
 
 <header class="hero" id="top">
   <div class="hero-bg" aria-hidden="true">
-    <video id="heroVid" muted loop playsinline autoplay preload="auto"
-           poster="assets/covers/v13.jpg" src="assets/videos/hero-bg.mp4"></video>
+    <video id="heroVid" muted loop playsinline preload="none"
+           poster="assets/covers/v13.jpg"
+           data-src="assets/videos/hero-bg.mp4"
+           data-src-m="assets/videos/hero-bg-m.mp4"></video>
   </div>
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="wrap inner">
     <div class="hero-copy">
       <h1 class="rv">把产品拍成<br>能卖的那 15 秒</h1>
-      <p class="rv d1">TikTok 美区带货短视频。<b>23 支爆款案例</b>，实拍与 AIGC 两条产线，每一支点开就能播。</p>
-      <a class="cta rv d2" href="#work">看这 23 支片子</a>
-      <div class="hero-meta rv d3">深圳 · 跨境电商短视频 · 实拍 12 / AI 完成 10 / AI+实拍 1</div>
+      <p class="rv d1">TikTok 美区带货短视频。<b>28 支爆款案例</b>，实拍与 AIGC 两条产线，每一支点开就能播。</p>
+      <a class="cta rv d2" href="#work">看这 28 支片子</a>
+      <div class="hero-meta rv d3">深圳 · 跨境电商短视频 · 实拍 12 / AI 完成 15 / AI+实拍 1</div>
     </div>
   </div>
 </header>
@@ -365,7 +375,7 @@ var CASES = [{"id": "v01", "cat": "数码配件", "type": "实拍"}, {"id": "v02
     b.dataset.i = i;
     b.setAttribute('aria-label', c.cat + ' · ' + LBL[c.type] + '，播放');
     b.innerHTML =
-      '<span class="cap"><span class="cat"><i class="idx">' + (i < 9 ? '0' : '') + (i + 1) + '</i>' + c.cat + '</span>' +
+      '<span class="cap"><span class="cat">' + c.cat + '</span>' +
       '<span class="typ' + (c.type === '实拍' ? '' : ' ai') + '">' + LBL[c.type] + '</span></span>' +
       '<span class="shot">' +
         '<img src="assets/covers/' + c.id + '.jpg" alt="' + c.cat + ' 案例封面" loading="lazy" decoding="async">' +
@@ -387,13 +397,23 @@ var CASES = [{"id": "v01", "cat": "数码配件", "type": "实拍"}, {"id": "v02
     });
   });
 
-  // 首屏背景：窄屏换小体积版本，避免手机上下 9.5MB
-  var hv = document.getElementById('heroVid');
-  if (hv && window.innerWidth <= 860 && hv.getAttribute('src') !== 'assets/videos/hero-bg-m.mp4') {
-    hv.setAttribute('src', 'assets/videos/hero-bg-m.mp4');
-    hv.load();
-    var __hp = hv.play(); if (__hp && __hp.catch) __hp.catch(function(){});
-  }
+  // 首屏背景：海报先出，视频延后加载；省流量/慢网直接只留海报
+  (function(){
+    var hv = document.getElementById('heroVid');
+    if (!hv) return;
+    var conn = navigator.connection || {};
+    var slow = conn.saveData === true || /(^|-)2g$/.test(conn.effectiveType || '');
+    if (slow) return;
+    function load(){
+      var src = window.innerWidth <= 860 ? hv.dataset.srcM : hv.dataset.src;
+      if (!src || hv.getAttribute('src')) return;
+      hv.setAttribute('src', src);
+      hv.load();
+      var p = hv.play(); if (p && p.catch) p.catch(function(){});
+    }
+    if (document.readyState === 'complete') setTimeout(load, 300);
+    else window.addEventListener('load', function(){ setTimeout(load, 300); });
+  })();
 
   // 灯箱（兼容 iOS Safari / 微信 X5：先响应用户手势，失败则给可点的播放遮罩与直开链接）
   var lb = document.getElementById('lb'), lbv = document.getElementById('lbv'),
